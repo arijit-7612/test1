@@ -1,6 +1,10 @@
 i love debu 
 i love roshni
+<<<<<<< HEAD
+debu mildly dislike amar
+=======
 i hate sistiiiiiiiiiiii
 wqhyigqwygiqgiwg
 debu hate amar
+>>>>>>> 3551bcbc8aa1aeec01df54234fae35051617742c
 roshni blindly in love with amar

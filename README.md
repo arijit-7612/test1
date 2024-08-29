@@ -1,6 +1,6 @@
 # test1
 
-
+This repo is made to practice git
 
 ## Getting started
 

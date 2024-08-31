@@ -10,7 +10,7 @@ screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Learning Constitution')
 
 # Load background image
-background_image = pygame.image.load('constitution.jpg')
+background_image = pygame.image.load('constitution.jpeg')
 background_image = pygame.transform.scale(background_image, (width, height))
 
 # Load fundamental rights images

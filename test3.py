@@ -5,12 +5,13 @@ import sys
 pygame.init()
 
 # Set up display
-width, height = 1350, 780
+width, height = 1350, 750
 box_width, box_height = 325, 150
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Learning Constitution')
 background_image = pygame.image.load("cont.jpeg")
-background_image = pygame.transform.scale(background_image, (1600,height))
+rotated_image = pygame.transform.rotate(background_image, 90)
+rotated_image = pygame.transform.scale(rotated_image, (width, height))
 rights_images = [pygame.image.load(f'right{i}.jpg') for i in range(1, 7)]
 for i in range(6):
     rights_images[i] = pygame.transform.scale(rights_images[i], (box_width, box_height))
@@ -42,7 +43,7 @@ def create_rounded_image(image, radius):
 class Text():
     def __init__(self,font):
         self.font=font
-        self.heading_font = pygame.font.Font(self.font, 74)     
+        self.heading_font = pygame.font.Font(self.font, 65)     
     def draw_text(self,text, font, color, surface, x, y):
         self.textobj = font.render(text, True, color)
         self.textrect = self.textobj.get_rect()
@@ -58,12 +59,12 @@ while run:
             run = False
 
 
-    screen.blit(background_image, (-125, 0))
+    screen.blit(rotated_image, (0, 0))
 
-    text.draw_text('Learning Constitution of INDIA',text.heading_font,(255,255,255), screen, width // 2, 120)
+    text.draw_text('Learning Constitution of INDIA',text.heading_font,(255,255,255), screen, width // 2, 170)
     margin = 20
-    x_start = (width - (box_width + margin) * 3) // 2
-    y_start = 240
+    x_start = ((width - (box_width + margin) * 3) // 2)+20
+    y_start = 250
     for i, image in enumerate(rights_images):
         x = x_start + (i % 3) * (box_width + margin)
         y = y_start + (i // 3) * (box_height + margin)

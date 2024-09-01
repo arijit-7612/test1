@@ -100,6 +100,7 @@ def get_user_input():
     return None
 
 def main():
+    pygame.time.delay(10000)
     running = True
     clock = pygame.time.Clock()
 

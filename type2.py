@@ -100,13 +100,13 @@ while run:
     # Update the display
     pygame.display.update()
     if line_index >= len(preamble_lines) and char_index == 0:
-        pygame.time.delay(3000)  # Optional delay after finishing
+        pygame.time.delay(750)  # Optional delay after finishing
         pygame.quit()  # Quit Pygame before running the new script
         subprocess.run([sys.executable, 'test3.py'])  # Run the other Python file
         sys.exit()
     # Check if skip button was pressed and execute the new script
     if skip:
-        pygame.time.delay(3000)
+        pygame.time.delay(750)
         pygame.quit()  # Quit Pygame before running the new script
         subprocess.run([sys.executable, 'test3.py']) 
         sys.exit()  # Exit the program after the new script is executed

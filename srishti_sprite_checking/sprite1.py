@@ -13,7 +13,9 @@ sprite_sheet = pygame.image.load("sprite14_1.png").convert_alpha()
 
 clock = pygame.time.Clock()
 
-def load_frames(sprite_sheet, frame_width, frame_height, num_frames):
+
+
+def load_frames(sprite_sheet, frame_width, frame_height, num_frames, scale_factor):
     sheet_width, sheet_height = sprite_sheet.get_size()
     
     
@@ -28,6 +30,13 @@ def load_frames(sprite_sheet, frame_width, frame_height, num_frames):
             raise ValueError(f"Frame {i} is outside the sprite sheet bounds")
         
         frame = sprite_sheet.subsurface(pygame.Rect(x_position, 0, frame_width, frame_height))
+        
+        if scale_factor != 1:
+            scaled_width = int(frame_width * scale_factor)
+            scaled_height = int(frame_height * scale_factor)
+            frame = pygame.transform.scale(frame, (scaled_width, scaled_height))
+        
+        
         frames.append(frame)
     return frames
 
@@ -35,9 +44,9 @@ def load_frames(sprite_sheet, frame_width, frame_height, num_frames):
 frame_width = 32 
 frame_height = 32 
 num_frames = 14  
+scale_factor = 4
 
-
-frames = load_frames(sprite_sheet, frame_width, frame_height, num_frames)
+frames = load_frames(sprite_sheet, frame_width, frame_height, num_frames, scale_factor)
 
 
 current_frame = 0

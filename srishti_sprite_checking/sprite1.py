@@ -9,6 +9,7 @@ FPS = 14
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Sprite Sheet Animation")
 
+background_image = pygame.image.load("court.jpg").convert()
 sprite_sheet = pygame.image.load("sprite14_1.png").convert_alpha()
 
 clock = pygame.time.Clock()
@@ -65,13 +66,20 @@ while running:
         frame_timer = 0
         current_frame = (current_frame + 1) % num_frames 
 
-    screen.fill((0, 0, 0))
 
+    screen.blit(background_image, (0, 0))
     
-    screen.blit(frames[current_frame], (WIDTH // 2 - frame_width // 2, HEIGHT // 2 - frame_height // 2))
+    #figure's out position with Math. Ask debu to figure out the math
+    sprite_x = WIDTH // 2 - (frame_width * scale_factor) // 2
+    sprite_y = HEIGHT // 2 - (frame_height * scale_factor) // 2
+    screen.blit(frames[current_frame], (sprite_x, sprite_y))
+    
 
     pygame.display.flip()
     clock.tick(FPS)
+    
+
+
 
 pygame.quit()
 sys.exit()

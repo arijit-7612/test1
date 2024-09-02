@@ -48,17 +48,7 @@ skip = False
 skip_button_text = font.render("Skip", True, (150, 75, 0))
 skip_button_rect = skip_button_text.get_rect(bottomright=(width - 150, height - 130))
 
-def play_intro_video(video_path):
-    clip = VideoFileClip(video_path)
-    for frame in clip.iter_frames(fps=24, dtype='uint8'):
-        frame_surface = pygame.surfarray.make_surface(np.swapaxes(frame, 0, 1)) # Convert to Pygame surface
-        frame_surface = pygame.transform.scale(frame_surface,(1340,height)) 
-        screen.blit(frame_surface, (0, 0))
-        pygame.display.update()
-        pygame.time.wait(int(300 / 24)) 
 
-
-play_intro_video("intro.mp4")
 
 
 run = True

@@ -44,7 +44,7 @@ def load_frames(sprite_sheet, frame_width, frame_height, num_frames, scale_facto
 
 frame_width = 32 
 frame_height = 32 
-num_frames = 14  
+num_frames = 14
 scale_factor = 4
 
 frames = load_frames(sprite_sheet, frame_width, frame_height, num_frames, scale_factor)

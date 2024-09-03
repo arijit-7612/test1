@@ -138,7 +138,7 @@ while run:
                 popup_text_rect = popup_text.get_rect(center=popup_surface.get_rect().center)
                 popup_surface.blit(popup_text, popup_text_rect.topleft)
 
-            popup_rect = popup_surface.get_rect(center=(rect.x, rect.y - 50))  # Center popup near mouse
+            popup_rect = popup_surface.get_rect(center=(rect.x+300, rect.y - 140))  # Center popup near mouse
             screen.blit(popup_surface, popup_rect.topleft)
 
             # Debugging: Draw a red rectangle around the word

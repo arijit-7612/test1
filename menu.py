@@ -1,5 +1,8 @@
 import pygame
 import sys
+import os
+import subprocess
+import platform
 
 # Initialize Pygame
 pygame.init()
@@ -15,6 +18,14 @@ HEADING_VERTICAL_OFFSET = 47  # Offset to raise the heading (reduced from 100)
 
 # Path to the custom font
 CUSTOM_FONT_PATH = "times_new.ttf"  # Update this path to your custom font file
+
+# Define file paths to open
+file_paths = [
+    "preamble.py",
+    "comingsoon.jpg",
+    "test3.py",
+    "comingsoon.jpg"
+]
 
 # Set up the display
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -87,6 +98,20 @@ def draw_images():
     
     for pos, img in zip(positions, loaded_images):
         screen.blit(img, pos)  # Draw image at specified position
+    
+    return positions
+
+def open_file(file_path):
+    """Open a file using the default application."""
+    try:
+        if platform.system() == "Windows":
+            os.startfile(file_path)
+        elif platform.system() == "Darwin":
+            subprocess.call(["open", file_path])
+        else:
+            subprocess.call(["xdg-open", file_path])
+    except Exception as e:
+        print(f"Error opening file: {e}")
 
 def main():
     """Main function to run the Pygame loop."""
@@ -95,6 +120,16 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_x, mouse_y = pygame.mouse.get_pos()
+                image_positions = draw_images()  # Draw images and get their positions
+                img_width, img_height = IMAGE_SIZE
+                for idx, (pos_x, pos_y) in enumerate(image_positions):
+                    rect = pygame.Rect(pos_x, pos_y, img_width, img_height)
+                    if rect.collidepoint(mouse_x, mouse_y):
+                        open_file(file_paths[idx])  # Open corresponding file
+                        running = False  # Exit after opening the file
+                        break
 
         draw_images()  # Draw the images on the screen
         pygame.display.flip()  # Update the display

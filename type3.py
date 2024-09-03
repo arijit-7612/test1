@@ -157,7 +157,7 @@ while run:
             
             popup_surface.blit(popup_text, popup_text_rect.topleft)
             screen.blit(popup_surface, popup_rect.topleft)
-            # Debugging: Draw a red rectangle around the word
+            
             pygame.draw.rect(screen, (255, 0, 0), rect, 2)  # Red rectangle for debugging
 
     pygame.display.update()

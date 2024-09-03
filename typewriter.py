@@ -5,23 +5,23 @@ from moviepy.editor import VideoFileClip
 import numpy as np
 import pygame.surfarray as surfarray
 
-# Initialize Pygame
+
 pygame.init()
 
-# Set up display
+
 width, height = 1350, 750
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Preamble Typewriter Effect')
 
-# Load and rotate the background image
+
 background_image = pygame.image.load("cont.jpeg")
 rotated_image = pygame.transform.rotate(background_image, 90)
 rotated_image = pygame.transform.scale(rotated_image, (width, height))
 
-# Set up fonts
+
 font = pygame.font.Font("times_new.ttf", 21)
 
-# Preamble text
+
 preamble_lines = [
     "PREAMBLE",
     "We, THE PEOPLE OF INDIA, having solemnly resolved to constitute",
@@ -36,7 +36,7 @@ preamble_lines = [
     "OURSELVES THIS CONSTITUTION."
 ]
 
-# Variables for typewriter effect
+
 displayed_lines = [""] * len(preamble_lines)
 line_index = 0
 char_index = 0
@@ -47,7 +47,6 @@ line_height = font.get_linesize() * 1.7
 skip = False
 next_button = False
 
-# Skip/Next button setup
 skip_button_text = font.render("Skip", True, (150, 75, 0))
 skip_button_rect = skip_button_text.get_rect(bottomright=(width - 150, height - 130))
 
@@ -100,10 +99,13 @@ while run:
         text_rect = text_surface.get_rect(center=(width // 2, 175 + i * line_height))  # Center horizontally
         screen.blit(text_surface, text_rect.topleft)
 
-    pygame.draw.rect(screen, (245, 245, 220), skip_button_rect.inflate(10, 10))  # Draw a rectangle for the button
-    screen.blit(skip_button_text, skip_button_rect.topleft)  # Draw the text on the button
+    pygame.draw.rect(screen, (245, 245, 220), skip_button_rect.inflate(10, 10))
+    screen.blit(skip_button_text, skip_button_rect.topleft)  
 
     pygame.display.update()
+
+    
+
 
     if (line_index >= len(preamble_lines) and char_index == 0):
         skip=True

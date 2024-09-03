@@ -52,10 +52,8 @@ next_button = False
 skip_button_text = font.render("Skip", True, (150, 75, 0))
 skip_button_rect = skip_button_text.get_rect(bottomright=(width - 150, height - 130))
 
-<<<<<<< HEAD
-# Popup text for specific words
 popup_texts = {
-    "SOVEREIGN": "Sovereign - supreme ruler or authority",
+    "SOVEREIGN": "sov.jpg",
     "REPUBLIC": "Republic - a state in which power rests with the people",
     # Add more words and their popup texts here
 }
@@ -74,11 +72,6 @@ def play_intro_video(video_path):
 play_intro_video("intro.mp4")
 
 # Main loop
-=======
-
-
-
->>>>>>> c20dd59501c40b7a9b02530f422d8d179915853c
 run = True
 while run:
 
@@ -118,7 +111,7 @@ while run:
         screen.blit(text_surface, text_rect.topleft)
 
         start_x = text_rect.left
-        for word in words:
+        for word in words: # pop up window poition
             word_surface = font.render(word, True, (245, 245, 220))
             word_rect = word_surface.get_rect(topleft=(start_x, text_rect.top))
             word_rects.append((word, word_rect))
@@ -137,11 +130,14 @@ while run:
             
             popup_text = popup_font.render(popup_texts[word], True, (255, 255, 255))
             popup_text_rect = popup_text.get_rect(center=popup_surface.get_rect().center)
-            print(popup_surface.get_rect().center)
-            popup_surface.blit(popup_text, popup_text_rect.topleft)
+
+            popup_image=popup_texts[words]
+            popup_image = pygame.transform.scale(popup_image, (popup_surface.width,popup_surface.height))
+
+            popup_surface.blit(popup_image, popup_surface.get_rect().topleft)
             screen.blit(popup_surface, popup_rect.topleft)
-            print(popup_text_rect.topleft)
-            print(popup_rect.topleft)
+            
+
             # Debugging: Draw a red rectangle around the word
             pygame.draw.rect(screen, (255, 0, 0), rect, 2)  # Red rectangle for debugging
 

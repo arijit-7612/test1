@@ -63,7 +63,7 @@ popup_texts = {
     "LIBERTY": " ",
     "EQUALITY": " ",
     "FRATERNITY": " ",
-    "IN OUR CONSTITUENT ASSEMBLY": "Popup for Constituent Assembly",
+    "CONSTITUENT ASSEMBLY": "Popup for Constituent Assembly",
     "HEREBY ADOPT, ENACT AND GIVE TO": "Popup for Adopt, Enact, and Give to",
     # Add more phrases or words here
 }

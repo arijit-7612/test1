@@ -52,11 +52,10 @@ next_button = False
 skip_button_text = font.render("Skip", True, (150, 75, 0))
 skip_button_rect = skip_button_text.get_rect(bottomright=(width - 150, height - 130))
 
-<<<<<<< HEAD
 # Popup text for specific words
 popup_texts = {
-    "SOVEREIGN": "Sovereign - supreme ruler or authority",
-    "REPUBLIC": "Republic - a state in which power rests with the people",
+    "SOVEREIGN": "sov.jpg",
+    "REPUBLIC": "Republic - a state in which power rests with the people"
     # Add more words and their popup texts here
 }
 
@@ -74,11 +73,6 @@ def play_intro_video(video_path):
 play_intro_video("intro.mp4")
 
 # Main loop
-=======
-
-
-
->>>>>>> c20dd59501c40b7a9b02530f422d8d179915853c
 run = True
 while run:
 
@@ -122,7 +116,7 @@ while run:
             word_surface = font.render(word, True, (245, 245, 220))
             word_rect = word_surface.get_rect(topleft=(start_x, text_rect.top))
             word_rects.append((word, word_rect))
-            start_x += word_surface.get_width()+5
+            start_x += word_surface.get_width() + 5
 
     # Mouse position
     mouse_pos = pygame.mouse.get_pos()
@@ -130,18 +124,23 @@ while run:
     # Draw popup text
     for word, rect in word_rects:
         if rect.collidepoint(mouse_pos) and word in popup_texts:
-            # Draw popup window
-            popup_surface = pygame.Surface((300, 100))
-            popup_surface.fill((50, 50, 50))  # Background color of the popup
-            popup_rect = popup_surface.get_rect(center=(rect.x,rect.y-50))  # Center popup near mouse
-            
-            popup_text = popup_font.render(popup_texts[word], True, (255, 255, 255))
-            popup_text_rect = popup_text.get_rect(center=popup_surface.get_rect().center)
-            print(popup_surface.get_rect().center)
-            popup_surface.blit(popup_text, popup_text_rect.topleft)
+            if popup_texts[word].endswith(".jpg") or popup_texts[word].endswith(".png"):
+                # Load and display the image if the popup text is an image file path
+                popup_image = pygame.image.load(popup_texts[word])
+                popup_image = pygame.transform.scale(popup_image, (450, 250))
+                popup_surface = pygame.Surface((450, 250))
+                popup_surface.blit(popup_image, (0, 0))
+            else:
+                # Render and display the popup text
+                popup_surface = pygame.Surface((300, 100))
+                popup_surface.fill((50, 50, 50))  # Background color of the popup
+                popup_text = popup_font.render(popup_texts[word], True, (255, 255, 255))
+                popup_text_rect = popup_text.get_rect(center=popup_surface.get_rect().center)
+                popup_surface.blit(popup_text, popup_text_rect.topleft)
+
+            popup_rect = popup_surface.get_rect(center=(rect.x, rect.y - 50))  # Center popup near mouse
             screen.blit(popup_surface, popup_rect.topleft)
-            print(popup_text_rect.topleft)
-            print(popup_rect.topleft)
+
             # Debugging: Draw a red rectangle around the word
             pygame.draw.rect(screen, (255, 0, 0), rect, 2)  # Red rectangle for debugging
 

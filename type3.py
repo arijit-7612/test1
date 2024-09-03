@@ -54,9 +54,28 @@ skip_button_rect = skip_button_text.get_rect(bottomright=(width - 150, height - 
 
 # Popup text for specific words
 popup_texts = {
-    "SOVEREIGN": "Sovereign - supreme ruler or authority",
-    "REPUBLIC": "Republic - a state in which power rests with the people",
-    # Add more words and their popup texts here
+    "PREAMBLE": "An introductory statement in a document.",
+    "THE": "The definite article in English.",
+    "PEOPLE": "Citizens or members of a community.",
+    "INDIA": "A country in South Asia.",
+    "SOVEREIGN": "Independent authority of a state.",
+    "SOCIALIST": "A political system advocating collective ownership.",
+    "SECULAR": "Separation of religion from political matters.",
+    "DEMOCRATIC": "Relating to or supporting democracy.",
+    "REPUBLIC": "A state in which power is held by the people.",
+    "JUSTICE": "Fairness in protection of rights.",
+    "LIBERTY": "The state of being free.",
+    "EQUALITY": "The state of being equal.",
+    "FRATERNITY": "Brotherhood and mutual support.",
+    "IN": "Used to indicate inclusion.",
+    "OUR": "Belonging to us.",
+    "CONSTITUENT": "Being a part of a whole.",
+    "ASSEMBLY": "A group gathered for a common purpose.",
+    "HEREBY": "As a result of this document.",
+    "ADOPT": "Legally take up.",
+    "ENACT": "Make a bill into law.",
+    "GIVE": "Freely transfer possession.",
+    "OURSELVES": "Us, the people."
 }
 
 # Function to play intro video
@@ -74,6 +93,7 @@ play_intro_video("intro.mp4")
 
 # Main loop
 run = True
+word_rects = []  # List to store word rectangles and texts
 while run:
 
     for event in pygame.event.get():
@@ -103,20 +123,23 @@ while run:
 
     screen.blit(rotated_image, (0, 0))
 
-    word_rects = []  # List to store word rectangles and texts
+    word_rects = []  # Clear previous word rectangles
     y_offset = 175  # Starting vertical position for text
     for i, line in enumerate(displayed_lines):
-        words = line.split()
-        text_surface = font.render(line, True, (245, 245, 220))
-        text_rect = text_surface.get_rect(center=(width // 2, y_offset + i * line_height))
+        text_surface = font.render(line, True, (245, 245, 220))  # White text color
+        text_rect = text_surface.get_rect(center=(width // 2, y_offset + i * line_height))  # Center horizontally
         screen.blit(text_surface, text_rect.topleft)
-
+        
+        # Extract individual words and their rectangles
+        line_words = line.split()
         start_x = text_rect.left
-        for word in words:
+        for word in line_words:
             word_surface = font.render(word, True, (245, 245, 220))
             word_rect = word_surface.get_rect(topleft=(start_x, text_rect.top))
             word_rects.append((word, word_rect))
-            start_x += word_surface.get_width()+5
+            start_x += word_surface.get_width() +5
+    pygame.draw.rect(screen, (245, 245, 220), skip_button_rect.inflate(10, 10))  # Draw a rectangle for the button
+    screen.blit(skip_button_text, skip_button_rect.topleft)  # Draw the text on the button
 
     # Mouse position
     mouse_pos = pygame.mouse.get_pos()
@@ -127,20 +150,15 @@ while run:
             # Draw popup window
             popup_surface = pygame.Surface((300, 100))
             popup_surface.fill((50, 50, 50))  # Background color of the popup
-            popup_rect = popup_surface.get_rect(center=(rect.x,rect.y-50))  # Center popup near mouse
+            popup_rect = popup_surface.get_rect(center=(rect.centerx, rect.centery - 50))
             
             popup_text = popup_font.render(popup_texts[word], True, (255, 255, 255))
-            popup_text_rect = popup_text.get_rect(center=popup_surface.get_rect().center)
-            print(popup_surface.get_rect().center)
+            popup_text_rect = popup_text.get_rect(center=popup_rect.center)
+            
             popup_surface.blit(popup_text, popup_text_rect.topleft)
             screen.blit(popup_surface, popup_rect.topleft)
-            print(popup_text_rect.topleft)
-            print(popup_rect.topleft)
             # Debugging: Draw a red rectangle around the word
             pygame.draw.rect(screen, (255, 0, 0), rect, 2)  # Red rectangle for debugging
-
-    pygame.draw.rect(screen, (245, 245, 220), skip_button_rect.inflate(10, 10))  # Draw a rectangle for the button
-    screen.blit(skip_button_text, skip_button_rect.topleft)  # Draw the text on the button
 
     pygame.display.update()
 
@@ -156,3 +174,5 @@ while run:
         sys.exit()
 
 pygame.quit()
+
+

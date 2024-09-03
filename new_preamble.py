@@ -55,31 +55,20 @@ skip_button_rect = skip_button_text.get_rect(bottomright=(width - 150, height - 
 # Popup text for specific words or phrases
 popup_texts = {
     "SOVEREIGN": "sov.jpg",
-    "REPUBLIC": "Republic - a state in which power rests with the people",
-    "SOCIALIST": " ",
-    "SECULAR": " ",
-    "DEMOCRATIC": "",
-    "JUSTICE, Social, Economic and Political;": "Popup for Justice, Social, Economic and Political;",
-    "LIBERTY": " ",
-    "EQUALITY": " ",
-    "FRATERNITY": " ",
-    "CONSTITUENT ASSEMBLY": "Popup for Constituent Assembly",
-    "HEREBY ADOPT, ENACT AND GIVE TO": "Popup for Adopt, Enact, and Give to",
+    "REPUBLIC": "republic.jpg",
+    "SOCIALIST": "SOCIALIST.jpg",
+    "SECULAR": "Secular.jpg",
+    "DEMOCRATIC": "democratic.jpg",
+    "JUSTICE, Social, Economic and Political;": "JUSTICE.jpg",
+    "LIBERTY": "LIBERTY.jpg",
+    "EQUALITY": "equality.jpg",
+    "FRATERNITY": "FRATERNITY.jpg",
+    "CONSTITUENT ASSEMBLY": "IN OUR CONSTITUENT ASSEMBLY.jpg",
+    "HEREBY ADOPT, ENACT AND GIVE TO": "LAST PHRASE.jpg",
     # Add more phrases or words here
 }
 
-# Function to play intro video
-def play_intro_video(video_path):
-    clip = VideoFileClip(video_path)
-    for frame in clip.iter_frames(fps=24, dtype='uint8'):
-        frame_surface = pygame.surfarray.make_surface(np.swapaxes(frame, 0, 1))  # Convert to Pygame surface
-        frame_surface = pygame.transform.scale(frame_surface, (1340, height))
-        screen.blit(frame_surface, (0, 0))
-        pygame.display.update()
-        pygame.time.wait(int(300 / 24))
 
-# Play the intro video
-play_intro_video("intro.mp4")
 
 # Main loop
 run = True
@@ -178,7 +167,7 @@ while run:
     if next_button:  
         pygame.time.delay(750)
         pygame.quit()  
-        subprocess.run([sys.executable, 'test3.py'])  
+        subprocess.run([sys.executable, 'menu.py'])  
         sys.exit()
 
 pygame.quit()

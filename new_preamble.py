@@ -55,15 +55,15 @@ skip_button_rect = skip_button_text.get_rect(bottomright=(width - 150, height - 
 # Popup text for specific words or phrases
 popup_texts = {
     "SOVEREIGN": "sov.jpg",
-    "REPUBLIC": "Republic - a state in which power rests with the people",
-    "SOCIALIST": " ",
-    "SECULAR": " ",
-    "DEMOCRATIC": "",
-    "JUSTICE, Social, Economic and Political;": "Popup for Justice, Social, Economic and Political;",
-    "LIBERTY": " ",
+    "REPUBLIC": "republic.jpg",
+    "SOCIALIST": "SOCIALIST.jpg",
+    "SECULAR": "Secular.jpg",
+    "DEMOCRATIC": "democratic.jpg",
+    "JUSTICE, Social, Economic and Political;": "JUSTICE.jpg",
+    "LIBERTY": "LIBERTY.jpg",
     "EQUALITY": " ",
-    "FRATERNITY": " ",
-    "CONSTITUENT ASSEMBLY": "Popup for Constituent Assembly",
+    "FRATERNITY": "FRATERNITY.jpg",
+    "CONSTITUENT ASSEMBLY": "IN OUR CONSTITUENT ASSEMBLY.jpg",
     "HEREBY ADOPT, ENACT AND GIVE TO": "Popup for Adopt, Enact, and Give to",
     # Add more phrases or words here
 }
@@ -178,7 +178,7 @@ while run:
     if next_button:  
         pygame.time.delay(750)
         pygame.quit()  
-        subprocess.run([sys.executable, 'test3.py'])  
+        subprocess.run([sys.executable, 'menu.py'])  
         sys.exit()
 
 pygame.quit()

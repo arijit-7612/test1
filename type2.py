@@ -131,7 +131,7 @@ while run:
             popup_text = popup_font.render(popup_texts[word], True, (255, 255, 255))
             popup_text_rect = popup_text.get_rect(center=popup_surface.get_rect().center)
 
-            popup_image=popup_texts[words]
+            popup_image=pygame.image.load(f"popup_texts[words]")
             popup_image = pygame.transform.scale(popup_image, (popup_surface.width,popup_surface.height))
 
             popup_surface.blit(popup_image, popup_surface.get_rect().topleft)

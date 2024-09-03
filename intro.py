@@ -34,7 +34,7 @@ def draw_text(text, x, y):
         time.sleep(TEXT_SPEED)  # Wait for a short period
 
 def open_file(file_path):
-    """Open a file using the default application."""
+    
     try:
         if sys.platform == "win32":
             os.startfile(file_path)  # For Windows

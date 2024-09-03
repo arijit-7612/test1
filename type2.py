@@ -52,6 +52,7 @@ next_button = False
 skip_button_text = font.render("Skip", True, (150, 75, 0))
 skip_button_rect = skip_button_text.get_rect(bottomright=(width - 150, height - 130))
 
+<<<<<<< HEAD
 # Popup text for specific words
 popup_texts = {
     "SOVEREIGN": "Sovereign - supreme ruler or authority",
@@ -73,6 +74,11 @@ def play_intro_video(video_path):
 play_intro_video("intro.mp4")
 
 # Main loop
+=======
+
+
+
+>>>>>>> c20dd59501c40b7a9b02530f422d8d179915853c
 run = True
 while run:
 

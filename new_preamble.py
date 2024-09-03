@@ -61,25 +61,14 @@ popup_texts = {
     "DEMOCRATIC": "democratic.jpg",
     "JUSTICE, Social, Economic and Political;": "JUSTICE.jpg",
     "LIBERTY": "LIBERTY.jpg",
-    "EQUALITY": " ",
+    "EQUALITY": "equality.jpg",
     "FRATERNITY": "FRATERNITY.jpg",
     "CONSTITUENT ASSEMBLY": "IN OUR CONSTITUENT ASSEMBLY.jpg",
-    "HEREBY ADOPT, ENACT AND GIVE TO": "Popup for Adopt, Enact, and Give to",
+    "HEREBY ADOPT, ENACT AND GIVE TO": "LAST PHRASE.jpg",
     # Add more phrases or words here
 }
 
-# Function to play intro video
-def play_intro_video(video_path):
-    clip = VideoFileClip(video_path)
-    for frame in clip.iter_frames(fps=24, dtype='uint8'):
-        frame_surface = pygame.surfarray.make_surface(np.swapaxes(frame, 0, 1))  # Convert to Pygame surface
-        frame_surface = pygame.transform.scale(frame_surface, (1340, height))
-        screen.blit(frame_surface, (0, 0))
-        pygame.display.update()
-        pygame.time.wait(int(300 / 24))
 
-# Play the intro video
-play_intro_video("intro.mp4")
 
 # Main loop
 run = True

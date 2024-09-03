@@ -77,16 +77,16 @@ background_image_path = "background.jpeg"  # Path to background image
 image_paths = [
     "preamble.jpg",
     "PRINCIPLES.jpg",
-    "test3.py",
+    "RIGHTS.jpg",
     "DUTIES.jpg"
 ]
 
 # Define file paths to open
 file_paths = [
     "preamble.py",
-    "PRINCIPLES.jpg",
-    "RIGHTS.jpg",
-    "DUTIES.jpg"
+    "comingsoon.jpg",
+    "test3.py",
+    "comingsoon.jpg"
 ]
 
 # Load all images

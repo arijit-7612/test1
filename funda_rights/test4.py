@@ -4,7 +4,6 @@ import subprocess
 from moviepy.editor import VideoFileClip
 import numpy as np
 import pygame.surfarray as surfarray
-import time
 
 def fundr_menu(height, width):
     box_width, box_height = 325, 150
@@ -208,12 +207,55 @@ def show_preamble(height, width):
     pygame.quit()
     
 
-def menu1(height,width):
+def fundd_menu(height, width):
+    # Set up the screen with the provided dimensions
+    screen = pygame.display.set_mode((width, height))
+    pygame.display.set_caption('Learning Constitution')
+
+    # Load and scale the background image (as in 'Fundamental Rights')
+    background_image = pygame.image.load("cont.jpeg")
+    rotated_image = pygame.transform.rotate(background_image, 90)
+    rotated_image = pygame.transform.scale(rotated_image, (width, height))
+
+    # Text setup
+    class Text:
+        def __init__(self, font):
+            self.font = font
+            self.heading_font = pygame.font.Font(self.font, 65)  # Font size for heading
+
+        def draw_text(self, text, font, color, surface, x, y):
+            self.textobj = font.render(text, True, color)
+            self.textrect = self.textobj.get_rect()
+            self.textrect.center = (x, y)
+            surface.blit(self.textobj, self.textrect)
+
+    text = Text('times_new.ttf')  # Use any available .ttf font
+
+    run = True
+    while run:
+        pygame.time.delay(100)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+
+        # Fill the screen with the background image
+        screen.blit(rotated_image, (0, 0))
+
+        # Draw the phrase "Learning Constitution of India" at the same position as 'Fundamental Rights'
+        text.draw_text('Learning Constitution of INDIA', text.heading_font, (255, 255, 255), screen, width // 2, 170)
+
+        pygame.display.update()
+
+    pygame.quit()
+
+
+def menu1(height, width):
     IMAGE_SIZE = (250, 150)
     HEADING_FONT_SIZE = 72
     HEADING_COLOR = (139, 69, 19)
 
-    file_paths = [show_preamble, "comingsoon.jpg",fundr_menu, "comingsoon.jpg"]
+    # Update the file_paths to ensure correct function calls
+    file_paths = [show_preamble, "comingsoon.jpg", fundr_menu, fundd_menu]
     image_paths = ["preamble.jpg", "PRINCIPLES.jpg", "RIGHTS.jpg", "DUTIES.jpg"]
 
     screen = pygame.display.set_mode((width, height))
@@ -224,93 +266,51 @@ def menu1(height,width):
     background_image = pygame.transform.scale(background_image, (width, height))
     loaded_images = [pygame.transform.scale(pygame.image.load(img), IMAGE_SIZE) for img in image_paths]
 
-# Load font
+    # Load font
     heading_font = pygame.font.Font("times_new.ttf", HEADING_FONT_SIZE)
     heading_surface = heading_font.render("MENU", True, HEADING_COLOR)
     heading_rect = heading_surface.get_rect(center=(width // 2, HEADING_FONT_SIZE // 2 + 110))
 
     def draw_menu():
-
-    
-        x_start = (width - 2 * IMAGE_SIZE[0]) //3  +90
-        y_start = height // 3 
+        x_start = (width - 2 * IMAGE_SIZE[0]) // 3 + 90
+        y_start = height // 3
 
         for i, img in enumerate(loaded_images):
             row = i // 2
             col = i % 2
-        
-            x_pos = x_start + col * (IMAGE_SIZE[0] + x_start-270)  
-            y_pos = y_start + row * (IMAGE_SIZE[1] + 50) 
+
+            x_pos = x_start + col * (IMAGE_SIZE[0] + x_start - 270)
+            y_pos = y_start + row * (IMAGE_SIZE[1] + 50)
             screen.blit(img, (x_pos, y_pos))
 
-    
-
-# Main loop
+    # Main loop
     run = True
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                run = False  
+                run = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mousepos = pygame.mouse.get_pos()
-                x_start = (width - 2 * IMAGE_SIZE[0]) //3  +90
-                y_start = height // 3 
+                x_start = (width - 2 * IMAGE_SIZE[0]) // 3 + 90
+                y_start = height // 3
 
                 for i, img in enumerate(loaded_images):
                     row = i // 2
                     col = i % 2
-        
-                    x_pos = x_start + col * (IMAGE_SIZE[0] + x_start-270)  
-                    y_pos = y_start + row * (IMAGE_SIZE[1] + 50)
-                    rect=pygame.Rect(x_pos,y_pos,IMAGE_SIZE[0],IMAGE_SIZE[1])
-                    if (rect).collidepoint(mousepos):
-                        file_paths[i](height,width)
-                    
 
+                    x_pos = x_start + col * (IMAGE_SIZE[0] + x_start - 270)
+                    y_pos = y_start + row * (IMAGE_SIZE[1] + 50)
+                    rect = pygame.Rect(x_pos, y_pos, IMAGE_SIZE[0], IMAGE_SIZE[1])
+                    if rect.collidepoint(mousepos):
+                        if callable(file_paths[i]):
+                            file_paths[i](height, width)
 
         screen.blit(background_image, (0, 0))
         screen.blit(heading_surface, heading_rect.topleft)
         draw_menu()
         pygame.display.flip()
 
-
-
-
-
-
 pygame.init()
 width, height = 1350, 750
 screen = pygame.display.set_mode((width, height))
-
-WIDTH, HEIGHT = 1350, 750
-FONT_SIZE = 48
-TEXT_SPEED = 0.4
-
-# Set up the display
-screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption('Intro')
-font = pygame.font.Font(None, FONT_SIZE)
-
-def draw_text(text, x, y):
-
-    screen.fill((0, 0, 0))  # Fill the screen with black
-    current_text = ""
-    
-    for char in text:
-        current_text += char
-        rendered_text = font.render(current_text, True, (255, 255, 255))  # Render text
-        screen.blit(rendered_text, (x, y))  # Draw text on the screen
-        pygame.display.flip()  # Update the display
-        time.sleep(TEXT_SPEED)  # Wait for a short period
-
-intro_text = "BINEXE"
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-    draw_text(intro_text, WIDTH // 2 - font.size(intro_text)[0] // 2, HEIGHT // 2 - font.size(intro_text)[1] // 2)
-    pygame.time.wait(int(len(intro_text) * TEXT_SPEED * 250) )
-    running = False  # Exit after displaying the text
 menu1(height, width)

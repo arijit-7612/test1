@@ -167,7 +167,7 @@ while run:
     if next_button:  
         pygame.time.delay(750)
         pygame.quit()  
-        subprocess.run([sys.executable, 'menu.py'])  
+        subprocess.run([sys.executable, 'test3.py'])  
         sys.exit()
 
 pygame.quit()

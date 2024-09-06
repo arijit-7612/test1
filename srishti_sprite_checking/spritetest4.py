@@ -7,7 +7,7 @@ pygame.mixer.init()
 WIDTH, HEIGHT = 1350, 750  # Screen dimensions
 FPS = 28  # Frames per second
 DIALOGUE_BOX_HEIGHT = 150  # Height of the dialogue box
-FONT_SIZE = 25 # Font size for dialogue text
+FONT_SIZE = 22 # Font size for dialogue text
 
 # Setup screen and clock
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -16,7 +16,7 @@ clock = pygame.time.Clock()
 
 # Load assets (background and sprite sheets)
 pygame.mixer.music.load("murmur1.mp3")
-pygame.mixer.music.play(-1)  
+pygame.mixer.music.play(-1)
 
 background_image = pygame.image.load("court.jpg").convert()
 background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
@@ -65,7 +65,7 @@ def render_dialogue(dialogue):
     
     for word in words:
         test_line = current_line + word + " "
-        if font.size(test_line)[0] < WIDTH - 40:  # Check if the line fits within the dialogue box
+        if font.size(test_line)[0] < WIDTH - 200:  # Check if the line fits within the dialogue box
             current_line = test_line
         else:
             lines.append(current_line)  # Start a new line if it doesn't fit
@@ -76,7 +76,7 @@ def render_dialogue(dialogue):
 
 # Function to draw the dialogue box and text
 def draw_dialogue_box(lines):
-    dialogue_box_rect = pygame.Rect(5, 585, WIDTH - 40, DIALOGUE_BOX_HEIGHT)  # Dialogue box dimensions
+    dialogue_box_rect = pygame.Rect(100, 585, WIDTH - 200, DIALOGUE_BOX_HEIGHT)  # Dialogue box dimensions
     pygame.draw.rect(screen, (92, 64, 51), dialogue_box_rect)  # Draw the background of the dialogue box
     pygame.draw.rect(screen, (0, 0, 0), dialogue_box_rect, 2)  # Draw the border
 

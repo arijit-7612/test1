@@ -95,6 +95,7 @@ while run:
         subprocess.run([sys.executable, 'menu.py'])  # Run the other Python file
         sys.exit()
     # Check if skip button was pressed and execute the new script
+    
     if skip:
         pygame.time.delay(750)
         pygame.quit()  # Quit Pygame before running the new script

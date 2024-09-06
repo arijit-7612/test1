@@ -17,6 +17,9 @@ FONT_SIZE = 16
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Landing Page with Pop-up")
 
+# Load the background image
+popup_background_image = pygame.image.load("popup_back.jpg")
+popup_background_image=pygame.transform.scale(popup_background_image,(600,600))
 # Fonts
 font = pygame.font.Font("times_new.ttf", FONT_SIZE)
 
@@ -55,7 +58,10 @@ def render_multiline_text(surface, text, x, y, font, color, line_spacing=5):
 def show_popup():
     # Create the pop-up surface covering full vertical height and part of horizontal width
     popup_surface = pygame.Surface((POPUP_WIDTH, POPUP_HEIGHT))
-    popup_surface.fill(GREY)
+    #popup_surface.fill(GREY)
+    
+    # Blit the background image onto the pop-up surface
+    popup_surface.blit(popup_background_image, (0, 0))
     
     # Center the pop-up horizontally
     popup_x = (SCREEN_WIDTH - POPUP_WIDTH) // 2
@@ -63,6 +69,7 @@ def show_popup():
     # Eligibility Criteria Text
     eligibility_text = """
     Eligibility Criteria for Grade 11 Science Stream:
+    
     1. Academic Performance:
        - Minimum Percentage in Class 10: Students must have a minimum aggregate 
          score of 90% in Class 10 board exams.
@@ -111,7 +118,8 @@ def show_popup():
 def main():
     running = True
     while running:
-        screen.fill(WHITE)
+        # Blit the background image to cover the entire screen
+        screen.blit(popup_background_image, (0, 0))
         
         # Trigger pop-up for demonstration (This can be triggered conditionally in a real application)
         show_popup()

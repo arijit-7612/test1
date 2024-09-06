@@ -1,10 +1,10 @@
 import pygame
 import sys
 
-# Initialize Pygame
+
 pygame.init()
 
-# Constants
+
 SCREEN_WIDTH, SCREEN_HEIGHT = 600, 600
 POPUP_WIDTH, POPUP_HEIGHT = 600, SCREEN_HEIGHT  # Full vertical height, narrower horizontal width
 WHITE = (255, 255, 255)
@@ -114,24 +114,20 @@ def show_popup():
                 return  # Close the pop-up and return to the main screen
 
 # Main loop for landing page
-def main():
-    running = True
-    while running:
+
+running = True
+while running:
         # Blit the background image to cover the entire screen
-        screen.blit(popup_background_image, (0, 0))
+    screen.blit(popup_background_image, (0, 0))
         
         # Trigger pop-up for demonstration (This can be triggered conditionally in a real application)
-        show_popup()
+    show_popup()
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
 
-        pygame.display.update()
+    pygame.display.update()
 
-    pygame.quit()
-    sys.exit()
-
-# Run the main loop
-if __name__ == "__main__":
-    main()
+pygame.quit()
+sys.exit()

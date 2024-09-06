@@ -73,20 +73,20 @@ def load_image(file_path, size=None):
         sys.exit()
 
 # Define image paths
-background_image_path = "background.jpeg"  # Path to background image
+background_image_path = "background.jpeg"  
 image_paths = [
     "preamble.jpg",
     "PRINCIPLES.jpg",
-    "RIGHTS.jpg",
+    "test3.py",
     "DUTIES.jpg"
 ]
 
 # Define file paths to open
 file_paths = [
     "preamble.py",
-    "comingsoon.jpg",
-    "test3.py",
-    "comingsoon.jpg"
+    "PRINCIPLES.jpg",
+    "RIGHTS.jpg",
+    "DUTIES.jpg"
 ]
 
 # Load all images

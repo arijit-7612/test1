@@ -5,7 +5,7 @@ from moviepy.editor import VideoFileClip
 import numpy as np
 import pygame.surfarray as surfarray
 
-def fundr_menu(height, width):
+def show_menu(height, width):
     box_width, box_height = 325, 150
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption('Learning Constitution')
@@ -63,7 +63,7 @@ def fundr_menu(height, width):
     pygame.quit()
 
 def show_preamble(height, width):
-    
+    screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption('Preamble Typewriter Effect')
 
     background_image = pygame.image.load("cont.jpeg")
@@ -185,7 +185,7 @@ def show_preamble(height, width):
                     popup_text_rect = popup_text.get_rect(center=popup_surface.get_rect().center)
                     popup_surface.blit(popup_text, popup_text_rect.topleft)
 
-                popup_rect = popup_surface.get_rect(center=(rect.x + 300, rect.y - 125))
+                popup_rect = popup_surface.get_rect(center=(rect.x + 300, rect.y - 140))
                 screen.blit(popup_surface, popup_rect.topleft)
 
                 pygame.draw.rect(screen, (255, 0, 0), rect, 2)
@@ -202,82 +202,14 @@ def show_preamble(height, width):
 
         if next_button:
             pygame.time.delay(50)
-            menu1(height,width)
             run = False  # Exit the preamble loop
-    pygame.quit()
-    
-
-def menu1(height,width):
-    IMAGE_SIZE = (250, 150)
-    HEADING_FONT_SIZE = 72
-    HEADING_COLOR = (139, 69, 19)
-
-
-    file_paths = [show_preamble, "comingsoon.jpg",fundr_menu, "comingsoon.jpg"]
-    image_paths = ["preamble.jpg", "PRINCIPLES.jpg", "RIGHTS.jpg", "DUTIES.jpg"]
-
-    screen = pygame.display.set_mode((width, height))
-    pygame.display.set_caption('MENU')
-
-    # Load images
-    background_image = pygame.image.load("background.jpeg").convert()
-    background_image = pygame.transform.scale(background_image, (width, height))
-    loaded_images = [pygame.transform.scale(pygame.image.load(img), IMAGE_SIZE) for img in image_paths]
-
-# Load font
-    heading_font = pygame.font.Font("times_new.ttf", HEADING_FONT_SIZE)
-    heading_surface = heading_font.render("MENU", True, HEADING_COLOR)
-    heading_rect = heading_surface.get_rect(center=(width // 2, HEADING_FONT_SIZE // 2 + 110))
-
-    def draw_menu():
 
     
-        x_start = (width - 2 * IMAGE_SIZE[0]) //3  +90
-        y_start = height // 3 
-
-        for i, img in enumerate(loaded_images):
-            row = i // 2
-            col = i % 2
-        
-            x_pos = x_start + col * (IMAGE_SIZE[0] + x_start-270)  
-            y_pos = y_start + row * (IMAGE_SIZE[1] + 50) 
-            screen.blit(img, (x_pos, y_pos))
-
-    
-
-# Main loop
-    run = True
-    while run:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False  
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                mousepos = pygame.mouse.get_pos()
-                x_start = (width - 2 * IMAGE_SIZE[0]) //3  +90
-                y_start = height // 3 
-
-                for i, img in enumerate(loaded_images):
-                    row = i // 2
-                    col = i % 2
-        
-                    x_pos = x_start + col * (IMAGE_SIZE[0] + x_start-270)  
-                    y_pos = y_start + row * (IMAGE_SIZE[1] + 50)
-                    rect=pygame.Rect(x_pos,y_pos,IMAGE_SIZE[0],IMAGE_SIZE[1])
-                    if (rect).collidepoint(mousepos):
-                        file_paths[i](height,width)
-                    
-
-        screen.blit(background_image, (0, 0))
-        screen.blit(heading_surface, heading_rect.topleft)
-        draw_menu()
-        pygame.display.flip()
-
-
-
-
-
+    show_menu(height, width)  # Call the menu function after quitting the preamble
 
 pygame.init()
+
 width, height = 1350, 750
-screen = pygame.display.set_mode((width, height))
-menu1(height, width)
+show_preamble(height, width)
+
+

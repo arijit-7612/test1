@@ -72,3 +72,8 @@ while run:
         screen.blit(image, (x , y))
     
     pygame.display.update()
+
+
+
+
+

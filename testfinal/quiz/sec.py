@@ -116,7 +116,7 @@ def draw_text(text, rect, max_width=None, h_align=1, v_align=1):
 def start_screen():
     screen.blit(background, (0, 0))
     draw_text("Quiz Game", pygame.Rect(0, 0, SCREEN_WIDTH, 100), h_align=1, v_align=1)
-    draw_text("Start", pygame.Rect(0, SCREEN_HEIGHT // 2 - 30, SCREEN_WIDTH, 50), h_align=1, v_align=1)
+    draw_text("Start", pygame.Rect(0, SCREEN_HEIGHT // 2 - 10, SCREEN_WIDTH, 50), h_align=1, v_align=1)
     pygame.display.flip()
 
 def quiz_screen(question):

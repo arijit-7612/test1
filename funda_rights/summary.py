@@ -5,7 +5,7 @@ import sys
 pygame.init()
 
 # Constants
-SCREEN_WIDTH, SCREEN_HEIGHT = 600, 600
+SCREEN_WIDTH, SCREEN_HEIGHT = 600, 700
 POPUP_WIDTH, POPUP_HEIGHT = 500, SCREEN_HEIGHT  # Reduced width of the pop-up
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -49,8 +49,8 @@ class Button:
     def is_clicked(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
-                return True
-        return False
+                pygame.exit()
+
 
 # Function to render multiline text with wrapping and scrolling
 def render_multiline_text(surface, text, x, y, font, color, max_width):

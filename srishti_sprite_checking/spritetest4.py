@@ -22,6 +22,8 @@ background_image = pygame.image.load("court.jpg").convert()
 background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
 sprite_sheetl1 = pygame.image.load("sprite14_1.png").convert_alpha()
 sprite_sheetj = pygame.image.load("judge.png").convert_alpha()
+sprite_sheetld = pygame.image.load("lawyer_dey.png").convert_alpha()
+sprite_sheetl = pygame.image.load("lawyer_sprite.png").convert_alpha()
 
 # Dialogue data
 dialogues = [
@@ -99,8 +101,8 @@ def load_frames(sprite_sheet, frame_width, frame_height, num_frames, scale_facto
 # Load frames from the sprite sheets
 frames = load_frames(sprite_sheetl1, 32, 32, 14, 6)
 frames1 = load_frames(sprite_sheetj, 80, 64, 20, 2.5)
-
-
+frames2 = load_frames(sprite_sheetld, 64, 64, 15, 2.8)
+frames3 = load_frames(sprite_sheetl, 64, 64, 13, 2.8)
 
 
 
@@ -283,6 +285,8 @@ while running:
     sprite_x = WIDTH // 2 - frames[0].get_width() // 2
     sprite_y = HEIGHT // 2 - frames[0].get_height() // 2
     screen.blit(frames[0], (sprite_x -160, sprite_y - 75))
+    screen.blit(frames2[0], (sprite_x +250, sprite_y ))
+    screen.blit(frames3[0], (sprite_x -280, sprite_y))
     if current_dialogue_index != 18:
         screen.blit(frames1[0], (sprite_x+25 , sprite_y - 153))
 

@@ -9,6 +9,7 @@ import requests
 import json
 
 
+
 def sprite(height,width):
     WIDTH, HEIGHT = 1350, 750  # Screen dimensions
     FPS = 28  # Frames per second
@@ -30,7 +31,7 @@ def sprite(height,width):
     sprite_sheetj = pygame.image.load("judge.png").convert_alpha()
     sprite_sheetld = pygame.image.load("lawyer_dey.png").convert_alpha()
     sprite_sheetl = pygame.image.load("lawyer_sprite.png").convert_alpha()
-
+    
     # Dialogue data
     dialogues = [
         "Judge Singh: This court is now in session. The case before us today is Tanisha vs. Principal Sharma. Ms. Dey, please proceed with your arguments.",
@@ -269,8 +270,6 @@ def sprite(height,width):
                 pygame.mixer.music.play(-1)
                 audio_start_time = current_time
                 new_audio_ready = True
-        if current_dialogue_index==21:
-            summary(height,width)
         if current_dialogue_index == 17:
             summary()
         if current_dialogue_index == 22 and not audioplay :
@@ -322,7 +321,109 @@ def sprite(height,width):
         pygame.display.flip()  # Update the display
         clock.tick(FPS)  # Control the frame rate
     
+import pygame
+
+def summary():
+    POPUP_WIDTH, POPUP_HEIGHT = 500, 750
+    WHITE = (255, 255, 255)
+    BLACK = (0, 0, 0)
+    BLUE = (70, 130, 180)
+    FONT_SIZE = 23
+    LINE_SPACING = 8
+    MARGIN = 30
+    TOP_MARGIN = 75
+    BOTTOM_MARGIN = 80
+    CLOSE_BUTTON_HEIGHT = 50
     
+    pygame.init()
+    screen = pygame.display.set_mode((1350, 750))
+    pygame.display.set_caption("Landing Page with Scrollable Pop-up")
+    main_background_image = pygame.image.load("back3.jpg")
+    main_background_image = pygame.transform.scale(main_background_image, (1750, 950))
+    
+    font = pygame.font.Font("times_new.ttf", FONT_SIZE)
+    
+    class Button:
+        def __init__(self, text, x, y, width, height, color, hover_color):
+            self.text = text
+            self.rect = pygame.Rect(x, y, width, height)
+            self.color = color
+            self.hover_color = hover_color
+            self.text_surface = font.render(text, True, WHITE)
+
+        def draw(self, surface):
+            mouse_pos = pygame.mouse.get_pos()
+            pygame.draw.rect(surface, self.hover_color if self.rect.collidepoint(mouse_pos) else self.color, self.rect)
+            surface.blit(self.text_surface, (self.rect.x + (self.rect.width - self.text_surface.get_width()) // 2,
+                                             self.rect.y + (self.rect.height - self.text_surface.get_height()) // 2))
+
+        def is_clicked(self, event):
+            return event.type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(event.pos)
+    
+    def render_multiline_text(surface, text, x, y, font, color, max_width, line_spacing=5):
+        words = text.split()
+        space_width, _ = font.size(' ')
+        line = []
+        line_width = 0
+        y_offset = y
+        for word in words:
+            word_surface = font.render(word, True, color)
+            word_width, word_height = word_surface.get_size()
+            if line_width + word_width > max_width:
+                surface.blit(font.render(' '.join(line), True, color), (x, y_offset))
+                line = [word]
+                line_width = word_width + space_width
+                y_offset += word_height + line_spacing
+            else:
+                line.append(word)
+                line_width += word_width + space_width
+
+        if line:
+            surface.blit(font.render(' '.join(line), True, color), (x, y_offset))
+        return y_offset + word_height
+
+    def show_popup():
+        scroll_offset = 0
+        close_button_y = POPUP_HEIGHT - CLOSE_BUTTON_HEIGHT - BOTTOM_MARGIN
+        close_button = Button("Close", 1350 // 2 - 50, close_button_y, 100, 50, BLUE, BLACK)
+        
+        eligibility_text = """
+        Article 14 of the Indian Constitution states: ...
+        [Your eligibility criteria text here]
+        """
+        
+        while True:
+            
+            # Calculate the maximum height the text can occupy (without overlapping the close button)
+            max_text_height = close_button_y - TOP_MARGIN - BOTTOM_MARGIN
+
+            # Draw the eligibility text with the current scroll offset
+            text_bottom = render_multiline_text(screen, eligibility_text, 400, TOP_MARGIN - scroll_offset, font, BLACK, POPUP_WIDTH - 2 * MARGIN)
+
+            # Update max_scroll based on the total text height
+            max_scroll = max(0, text_bottom - (TOP_MARGIN - scroll_offset + max_text_height))
+
+            # Draw the close button
+            close_button.draw(screen)
+            
+            popup_active = True
+            while popup_active:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        sys.exit()
+                    if close_button.is_clicked(event):
+                        popup_active = False
+                screen.blit(main_background_image, (-100, -100)) 
+  
+                close_button.draw(screen)  # Draw the button on the screen, not the popup surface
+                pygame.display.flip()  
+               
+            return 
+        
+
+
+ 
     
 
 

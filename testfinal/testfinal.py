@@ -314,8 +314,8 @@ def sprite(height,width):
                 pygame.time.wait(500)  # Optional: Wait for a short time to ensure audio is playing
                 pygame.mixer.music.stop()
                 new_audio_ready = False
-        if current_dialogue_index == 17:
-            return
+        # f current_dialogue_index == 17:
+            # return
 
         pygame.display.flip()  # Update the display
         clock.tick(FPS)  # Control the frame rate

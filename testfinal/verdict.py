@@ -91,15 +91,15 @@ def main():
 
         screen.fill(WHITE)
 
-        draw_text(question, font, BLACK, screen, WINDOW_WIDTH / 2, 100)
+        draw_text(question, font, BLACK, screen, WINDOW_WIDTH / 2, 50)
         
-        y_pos = 200
+        y_pos = 100
         for option in options:
             draw_button(option, font, BROWN, screen, 100, y_pos, BUTTON_WIDTH - 20)
             y_pos += BUTTON_HEIGHT + 10
         
         if result_message:
-            draw_text(result_message, font, BLACK, screen, WINDOW_WIDTH / 2, WINDOW_HEIGHT - 50)
+            draw_text(result_message, font, BLACK, screen, WINDOW_WIDTH / 2, WINDOW_HEIGHT - 150)
         
         pygame.display.flip()
         clock.tick(FPS)

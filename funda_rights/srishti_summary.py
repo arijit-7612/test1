@@ -215,23 +215,19 @@ This means the process must be clearly defined by law and adhere to the principl
         
         pygame.display.update()
 
-def main():
-    running = True
-    while running:
-        screen.blit(main_background_image, (0, 0))  # Display the main screen background
+running = True
+while running:
+    screen.blit(main_background_image, (0, 0))  # Display the main screen background
 
-        # Trigger pop-up for demonstration (This can be triggered conditionally in a real application)
-        show_popup()
+    # Trigger pop-up for demonstration (This can be triggered conditionally in a real application)
+    show_popup()
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            
-        pygame.display.update()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        
+    pygame.display.update()
 
-    pygame.quit()
-    sys.exit()
+pygame.quit()
+sys.exit()
 
-# Run the main loop
-if __name__ == "__main__":
-    main()

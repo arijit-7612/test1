@@ -16,7 +16,7 @@ FPS = 30
 # Setup screen
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("MCQ Popup Example")
-font = pygame.font.SysFont(None, FONT_SIZE)
+font = pygame.font.Font("times_new.ttf", FONT_SIZE)
 
 def draw_text(text, font, color, surface, x, y, max_width=None):
     if max_width:
